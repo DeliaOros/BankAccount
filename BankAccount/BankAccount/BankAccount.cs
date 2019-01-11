@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
+
 namespace BankAccount
 {
     enum Currency
@@ -15,9 +16,22 @@ namespace BankAccount
         private string name;
         private readonly Currency currency;
         private readonly DateTime dateOfCreation;
+        private IbanAccount iban;
 
         public bool IsClosed { get; set; }
         public string Name { get; set; }
+
+        public IbanAccount Iban
+        {
+            get
+            {
+                return iban;
+            }
+            set
+            {
+                this.Iban = iban;
+            }
+        }
 
         public decimal BalanceAccount => CalculateBalanceAccount();
 
@@ -35,11 +49,13 @@ namespace BankAccount
             }
         }
 
-        public BankAccount(string name, Currency currency)
+        public BankAccount(string name, Currency currency, long account)
         {
             this.name = name;
             this.currency = currency;
             this.dateOfCreation = DateTime.Now;
+            IbanAccount iban = new IbanAccount(account);
+            this.iban = iban;
             Console.WriteLine("The account is now activated.");
 
         }
@@ -50,7 +66,7 @@ namespace BankAccount
             decimal withdraw = 0.00M;
             var currentBalance = balance + deposit - withdraw;
             return currentBalance;
-        }        
+        }
 
         public void Open()
         {
@@ -97,7 +113,9 @@ namespace BankAccount
                    $"Currency: {this.currency}, " +
                    $"Date of creation: {this.dateOfCreation}, " +
                    $"Balance: {this.currency} {this.BalanceAccount.ToString("F")}, " +
-                   $"Account is active: {this.IsActive}.";
+                   $"Account is active: {this.IsActive}, " +
+                   $"IBAN: {this.iban}, ";
+
         }
     }
 }

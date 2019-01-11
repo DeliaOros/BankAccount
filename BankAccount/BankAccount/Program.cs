@@ -6,7 +6,7 @@ namespace BankAccount
     {
         static void Main(string[] args)
         {
-            BankAccount regularAccount = new BankAccount("CompanyX", Currency.RON);
+            BankAccount regularAccount = new BankAccount("CompanyX", Currency.RON,345647860000);
             Console.WriteLine("----------------------------------------------------");
             Console.WriteLine(regularAccount.ToString());
             Console.WriteLine("----------------------------------------------------");
@@ -35,10 +35,9 @@ namespace BankAccount
             regularAccount.Deposit();
             Console.WriteLine("----------------------------------------------------");
             regularAccount.Deposit();
-
-
-
-
+            Console.WriteLine("----------------------------------------------------");
+            Console.WriteLine(regularAccount.Iban);
+ 
 
         }
     }
